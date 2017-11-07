@@ -53,6 +53,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
 #    'gupiaospider.middlewares.MyCustomDownloaderMiddleware': 543,
+#     'gupiaospider.middlewares.ProxySpiderMiddleware':666,
 # }
 
 # Enable or disable extensions
@@ -63,9 +64,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'gupiaospider.pipelines.GupiaospiderPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   'gupiaospider.pipelines.GupiaospiderPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

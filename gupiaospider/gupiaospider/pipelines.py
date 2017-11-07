@@ -10,10 +10,13 @@ from pymongo import MongoClient
 
 class GupiaospiderPipeline(object):
     def __init__(self):
-        conn = MongoClient(settings['MDB_HOST'], settings['MDB_PROT'])
-        db = conn[settings['MDB_DATABASE']]
-        self.collection = db[settings['MDB_TABLE']]
+        self.conn = MongoClient(settings['MDB_HOST'], settings['MDB_PROT'])
+        self.db = self.conn[settings['MDB_DATABASE']]
+        self.collection = self.db[settings['MDB_TABLE']]
 
     def process_item(self, item, spider):
         self.collection.insert(dict(item))
         return item
+
+    def close_spider(self,spider):
+        self.conn.close()

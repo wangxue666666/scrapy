@@ -24,7 +24,6 @@ class GupiaoSpider(scrapy.Spider):
         tr_list = response.xpath("//table[@class='m-table']/tbody/tr")
         page_start_end = response.xpath("//div[@class='m-page J-ajax-page']/span/text()").extract()[0]
         page_max = int(page_start_end.split('/')[1])
-        print(next_page)
         if tr_list == []:
             return
         for tr in tr_list:
@@ -34,15 +33,15 @@ class GupiaoSpider(scrapy.Spider):
             item['name'] = gp_name
             item['number'] = td_list[0]
             item['time'] = td_list[1]
-            item['balance'] = td_list[2]
-            item['buy'] = td_list[3]
-            item['repay'] = td_list[4]
-            item['net_financing'] = td_list[5]
+            item['balance'] = self.change_num(td_list[2])
+            item['buy'] = self.change_num(td_list[3])
+            item['repay'] = self.change_num(td_list[4])
+            item['net_financing'] = self.change_num(td_list[5])
             item['margin'] = td_list[6]
             item['sale'] = td_list[7]
             item['reimbursed'] = td_list[8]
             item['short_selling'] = td_list[9]
-            item['allowance_short'] = td_list[10]
+            item['allowance_short'] = self.change_num(td_list[10])
             yield item
         if page_max >= next_page:
             yield scrapy.Request(self.nexturl(gp_num, next_page), callback=self.download_data,
@@ -58,3 +57,13 @@ class GupiaoSpider(scrapy.Spider):
         return next_url
         # ajax
         # http://data.10jqka.com.cn/market/rzrqgg/code/518880/order/desc/page/2/ajax/1/
+
+    def change_num(self, number):
+        try:
+            new_num = float(number)
+        except:
+            if number[-1:] == '万':
+                new_num = int(float(number[:-1]) * 100000)
+            else:
+                new_num = int(float(number[:-1]) * 1000000000)
+        return new_num

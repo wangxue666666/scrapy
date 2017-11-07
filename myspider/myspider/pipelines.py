@@ -26,3 +26,6 @@ class WbtcPipeline(object):
         #     "insert into home_list(title,room,money,addr) values('%s','%s','%s','%s')"%(item['title'],item['room'],item['money'],item['addr_end'])
         # )
         # self.dbpool.commit()
+
+    def close_spider(self,spider):
+        self.conn.close()
