@@ -56,10 +56,10 @@ class GupiaospiderSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 #使用ip代理
-
-
 class ProxySpiderMiddleware(object):
+    #发送请求前
     def process_request(self,request,spider):
+        print("##########")
         ip = [
             'http://61.155.164.110:3128',
             'http://110.52.8.62:53281',
@@ -67,4 +67,12 @@ class ProxySpiderMiddleware(object):
             'http://183.54.30.114:9797',
             'http://101.87.85.184:8118',
         ]
+        #设置头部信息
+        # request.headers.setdefault('User-Agent','xxxx')
         request.meta['proxy'] = random.choice(ip)
+        print(request.meta.get('proxy'))
+    #接受响应前
+    def process_response(self,request,response,spider):
+        print("*********")
+        #必须返回
+        return response

@@ -67,3 +67,10 @@ class GupiaoSpider(scrapy.Spider):
             else:
                 new_num = int(float(number[:-1]) * 1000000000)
         return new_num
+
+class TestSpider(scrapy.Spider):
+    name = 'test'
+    start_urls = ['http://data.10jqka.com.cn/market/rzrqgg/code/518880/']
+    def parse(self, response):
+        a = response.xpath('//*[@id="J-ajax-main"]/div[2]/a[1]').extract()
+        print(a)

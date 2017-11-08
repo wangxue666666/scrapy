@@ -14,7 +14,6 @@ BOT_NAME = 'myspider'
 SPIDER_MODULES = ['myspider.spiders']
 NEWSPIDER_MODULE = 'myspider.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'myspider (+http://www.yourdomain.com)'
 USER_AGENT ='Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36'
@@ -59,9 +58,12 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+DOWNLOADER_MIDDLEWARES = {
 #    'myspider.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+      'scrapy_splash.SplashCookiesMiddleware': 723,
+      'scrapy_splash.SplashMiddleware': 725,
+      'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -108,4 +110,13 @@ MYSQL_PASSWD = 'wangxue'
 #mangodb配置
 MDB_HOST = 'localhost'
 MDB_PROT = 27017
+
+#SPlash
+
+SPLASH_URL = 'http://localhost:8050'
+SPIDER_MIDDLEWARES = {
+'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
