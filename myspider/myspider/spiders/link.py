@@ -24,6 +24,7 @@ class IfengSpider(scrapy.Spider):
         for new in new_list:
             print(new.url, new.text)
 
+
 class JsSpider(scrapy.Spider):
     name = 'jsspider'
     start_urls = ['http://data.10jqka.com.cn/market/rzrqgg/code/518880/']

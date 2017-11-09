@@ -1,6 +1,10 @@
 
 from scrapy import Spider,Request
+from scrapy_splash import SplashRequest
+
+
 from ..items import WbtcItem
+
 # 新建爬虫类继承自Spdier
 
 class FirstSpider(Spider):
@@ -17,22 +21,13 @@ class FirstSpider(Spider):
         }
     }
 
-
     # 默认情况下scrapy会以get的方式发送start_urls中的url
     # 定义处理响应函数
     def parse(self, response):
         print(response.text)
 
 
-class JianDan(Spider):
-    name = 'jiandan'
-    start_urls = ['http://jiandan.net']
 
-
-    def parse(self, response):
-        img = response.xpath("//div[@class='thumbs_b']//img/@data-original")
-        for   i in range(len(img)):
-            print(i)
 
 class WbtcSpider(Spider):
     name = 'wbtcspider'

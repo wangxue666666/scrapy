@@ -59,10 +59,12 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-#    'myspider.middlewares.MyCustomDownloaderMiddleware': 543,
-      'scrapy_splash.SplashCookiesMiddleware': 723,
-      'scrapy_splash.SplashMiddleware': 725,
-      'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+   #'myspider.middlewares.MyCustomDownloaderMiddleware': 543,
+      # 'scrapy_splash.SplashCookiesMiddleware': 723,
+      # 'scrapy_splash.SplashMiddleware': 725,
+      # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+       # 'myspider.middlewares.PhantomJSMiddleware': 100,
+       # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware':None,#禁止内置的中间件
 }
 
 # Enable or disable extensions
@@ -100,7 +102,8 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
+DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
+SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
 #MYSQL数据库配置
 MYSQL_HOST = '127.0.0.1'
 MYSQL_DBNAME = 'scrapy'
@@ -117,6 +120,8 @@ SPLASH_URL = 'http://localhost:8050'
 SPIDER_MIDDLEWARES = {
 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
-HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
+# DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+# HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
+REDIS_URL = 'redis://root:wangxue@10.0.142.251:6379'
