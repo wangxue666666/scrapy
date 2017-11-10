@@ -1,8 +1,10 @@
 from scrapy.spiders import Rule
 from scrapy.linkextractors import LinkExtractor
-from scrapy import Request
+from scrapy import Request, signals
 from scrapy_redis.spiders import RedisCrawlSpider
-import  os
+import os
+from pydispatch import dispatcher
+
 class BizhiSpider(RedisCrawlSpider):
     name = 'bizhi'
     #start_urls = ['http://desk.zol.com.cn/']

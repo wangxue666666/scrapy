@@ -68,6 +68,7 @@ class GupiaoSpider(scrapy.Spider):
                 new_num = int(float(number[:-1]) * 1000000000)
         return new_num
 
+
 class TestSpider(scrapy.Spider):
     name = 'test'
     start_urls = ['http://data.10jqka.com.cn/market/rzrqgg/code/518880/']
